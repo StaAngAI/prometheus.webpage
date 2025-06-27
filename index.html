@@ -52,7 +52,7 @@
             padding: var(--section-padding);
             position: relative;
         }
-        
+
         .section-header {
             text-align: center;
             margin-bottom: 4rem;
@@ -66,7 +66,7 @@
             text-transform: uppercase;
             letter-spacing: 2px;
         }
-        
+
         .section-header h2 .highlight {
             color: var(--electric-blue);
             text-shadow: 0 0 15px var(--electric-glow);
@@ -98,17 +98,19 @@
             transform: translateY(-5px) scale(1.05);
             box-shadow: 0 0 40px var(--electric-glow);
         }
-        
+
         .btn-outline {
             background: transparent;
             color: var(--electric-blue);
         }
-        
+
         .btn-outline:hover {
              background: var(--electric-blue);
              color: var(--mythic-white);
+             box-shadow: none; /* Remove box-shadow on hover for outline button */
+             transform: translateY(-5px) scale(1.05);
         }
-        
+
         /* Reveal on scroll */
         .reveal {
             opacity: 0;
@@ -153,16 +155,36 @@
         }
 
         .logo {
-            font-size: 2rem;
-            font-weight: 700;
-            font-family: var(--font-mono);
-            color: var(--mythic-white);
+             /* Removed font styles as it's now an image */
         }
 
-        .logo span {
-            color: var(--electric-blue);
-            text-shadow: 0 0 10px var(--electric-glow);
+        .logo img {
+            height: 55px; /* Increased height for header logo */
+            vertical-align: middle; /* Align image nicely */
+            /* Initial glow effect and pulse animation */
+            filter: drop-shadow(0 0 8px rgba(31, 108, 255, 0.5));
+            animation: pulse-glow 3s infinite ease-in-out;
+            transition: height 0.3s ease; /* Smooth size transition on scroll */
         }
+
+        /* Header logo size when scrolled */
+        .main-header.scrolled .logo img {
+            height: 40px; /* Smaller size when scrolled */
+        }
+
+
+        /* Define the pulsing animation */
+        @keyframes pulse-glow {
+            0%, 100% {
+                filter: drop-shadow(0 0 8px rgba(31, 108, 255, 0.5));
+                transform: scale(1);
+            }
+            50% {
+                filter: drop-shadow(0 0 25px rgba(31, 108, 255, 0.9)); /* More intense glow */
+                transform: scale(1.03); /* Slightly scale up */
+            }
+        }
+
 
         .main-nav ul { display: flex; align-items: center; }
         .main-nav ul li { margin-left: 2.5rem; }
@@ -192,14 +214,33 @@
             display: flex; align-items: center; justify-content: center;
             text-align: center; position: relative; overflow: hidden;
             background-color: var(--abyss-black);
+            /* Add background image */
+            background-image: url('ProjectGod_Pic.png');
+            background-size: cover;
+            background-position: center top; /* Adjusted position to show the top */
+            background-repeat: no-repeat;
         }
-        
+
+         /* Dark overlay for the background image */
+        #hero::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: var(--abyss-black);
+            opacity: 0.5; /* Adjust opacity as needed for subtlety */
+            z-index: 1; /* Below canvas and content */
+        }
+
+
         #hero-canvas {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 2; /* Above overlay, below content */
         }
-        
+
         .hero-content {
-            position: relative; z-index: 2; max-width: 900px;
+            position: relative;
+            z-index: 3; /* Above canvas */
+            max-width: 900px;
             animation: fadeIn 2s ease-in-out;
         }
         .hero-content h1 {
@@ -212,7 +253,7 @@
             font-size: 1.3rem; margin-bottom: 3rem; color: var(--lunar-silver);
             max-width: 700px; margin-left: auto; margin-right: auto;
         }
-        
+
         .hero-buttons .btn { margin: 0 0.5rem; }
 
         @keyframes fadeIn {
@@ -226,10 +267,10 @@
         }
         #features .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjusted minmax */
             gap: 2rem;
         }
-        
+
         .feature-card {
             background: var(--abyss-black);
             padding: 2.5rem;
@@ -252,7 +293,7 @@
             border-color: rgba(31, 108, 255, 0.3);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
-        
+
         .feature-card:hover::before { opacity: 0.1; }
 
         .feature-card .icon {
@@ -262,11 +303,14 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        
+
         .feature-card h3 { font-size: 1.5rem; margin-bottom: 1rem; }
         .feature-card p { color: var(--lunar-silver); }
 
         /* How It Works Section */
+        #how-it-works {
+            background-color: var(--abyss-black);
+        }
         .timeline {
             position: relative;
             max-width: 800px;
@@ -301,7 +345,7 @@
             position: relative; border-radius: 8px;
             border: 1px solid rgba(255,255,255,0.1);
         }
-        .timeline-content h3 { color: var(--electric-blue); }
+         .timeline-content h3 { color: var(--electric-blue); margin-bottom: 0.5rem;}
 
         /* CTA Section */
         #cta {
@@ -310,10 +354,10 @@
             background-attachment: fixed;
             text-align: center;
         }
-        
+
         #cta h2 { font-size: 3rem; margin-bottom: 1.5rem; }
         #cta p { font-size: 1.2rem; margin-bottom: 2rem; max-width: 600px; margin-left:auto; margin-right:auto; }
-        
+
         /* Footer */
         .main-footer {
             background: var(--shadow-grey);
@@ -321,6 +365,13 @@
             border-top: 1px solid rgba(31, 108, 255, 0.2);
         }
         .footer-content { text-align: center; }
+        .footer-content .logo img {
+            height: 70px; /* Increased height for footer logo */
+            margin-bottom: 1rem; /* Space below logo */
+             /* Apply the same animation to footer logo */
+            filter: drop-shadow(0 0 8px rgba(31, 108, 255, 0.5));
+            animation: pulse-glow 3s infinite ease-in-out;
+        }
         .footer-socials { margin: 1.5rem 0; }
         .footer-socials a {
             margin: 0 1rem; color: var(--lunar-silver);
@@ -334,13 +385,19 @@
         /* Responsive Design */
         @media (max-width: 992px) {
             .hero-content h1 { font-size: 3.5rem; }
+            .main-nav ul li { margin-left: 1.5rem; }
         }
-        
+
         @media (max-width: 768px) {
             :root { --section-padding: 4rem 0; }
             .section-header h2 { font-size: 2.2rem; }
             .hero-content h1 { font-size: 2.5rem; }
             .hero-content p { font-size: 1.1rem; }
+
+            .main-header .logo img { height: 45px; } /* Adjusted smaller logo on mobile header */
+            .main-header.scrolled .logo img { height: 35px; } /* Smaller size when scrolled on mobile */
+            .footer-content .logo img { height: 55px; } /* Adjusted smaller logo on mobile footer */
+
 
             .main-nav {
                 position: fixed; top: 0; right: -100%;
@@ -361,7 +418,7 @@
             .timeline::after { left: 20px; }
             .timeline-item { width: 100%; padding-left: 60px; padding-right: 15px; }
             .timeline-item:nth-child(even) { left: 0; }
-            .timeline-item::after { left: 10px; }
+            .timeline-item:nth-child(even)::after { left: 10px; }
         }
 
     </style>
@@ -371,7 +428,9 @@
     <!-- Header & Navigation -->
     <header class="main-header" id="main-header">
         <div class="container">
-            <a href="#" class="logo">CodeViber<span>.</span></a>
+            <a href="#" class="logo">
+                <img src="ProjectGod_Logo_White.png" alt="Code Viber Logo">
+            </a>
             <nav class="main-nav" id="main-nav">
                 <ul>
                     <li><a href="#hero" class="active">Home</a></li>
@@ -470,7 +529,7 @@
             <div class="container reveal">
                 <h2>Stop Writing Code. Start Engineering It.</h2>
                 <p>Join thousands of elite developers and teams who are building the future with Code Viber. Your first 14 days are on us.</p>
-                <a href="#" class="btn">Claim Your Free Trial Now</a>
+                <a href="#cta" class="btn">Claim Your Free Trial Now</a>
             </div>
         </section>
     </main>
@@ -479,7 +538,9 @@
     <footer class="main-footer">
         <div class="container">
             <div class="footer-content">
-                 <div class="logo">CodeViber<span>.</span></div>
+                 <a href="#" class="logo">
+                    <img src="ProjectGod_Logo_White.png" alt="Code Viber Logo">
+                 </a>
                  <div class="footer-socials">
                     <a href="#" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
                     <a href="#" aria-label="Twitter"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-.424.727-.666 1.561-.666 2.477 0 1.61.82 3.027 2.053 3.847-.762-.024-1.474-.234-2.102-.577v.062c0 2.248 1.605 4.125 3.737 4.568-.39.106-.803.162-1.227.162-.3 0-.593-.028-.877-.082.593 1.844 2.308 3.187 4.341 3.224-1.593 1.248-3.604 1.993-5.786 1.993-.376 0-.747-.022-1.112-.065 2.062 1.323 4.51 2.092 7.14 2.092 8.57 0 13.255-7.098 13.255-13.254 0-.202-.005-.403-.014-.602.91-.658 1.7-1.475 2.323-2.41z"/></svg></a>
@@ -507,7 +568,7 @@
                 hamburger.classList.toggle('active');
                 nav.classList.toggle('active');
             });
-            
+
             // --- Close menu when a link is clicked ---
             navLinks.forEach(link => {
                 link.addEventListener('click', () => {
@@ -515,24 +576,85 @@
                         hamburger.classList.remove('active');
                         nav.classList.remove('active');
                     }
+                     // Handle active link class toggle manually
+                    navLinks.forEach(navLink => navLink.classList.remove('active'));
+                    link.classList.add('active');
                 });
             });
-            
+
             // --- Active Nav Link on Scroll ---
             const sections = document.querySelectorAll('section');
-            const observerOptions = { root: null, rootMargin: "0px", threshold: 0.5 };
+            // Use a higher threshold for sections further down the page, or adjust dynamically
+            const observerOptions = { root: null, rootMargin: "0px", threshold: 0.3 }; // Reduced threshold slightly
 
             const sectionObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const id = entry.target.getAttribute('id');
-                        document.querySelector('.main-nav a.active').classList.remove('active');
-                        document.querySelector(`.main-nav a[href="#${id}"]`).classList.add('active');
+                    // Check if element is visible and also relatively centered or top of viewport
+                    const rect = entry.target.getBoundingClientRect();
+                    const isPastTop = rect.top <= 0; // Check if top of section is above or at viewport top
+                    const isVisibleInCenter = rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2; // Check if section center is within viewport
+
+                    if (entry.isIntersecting || isPastTop || isVisibleInCenter) {
+                        // Add a small delay or check which section is "most" visible if needed
+                        // For simplicity, activating the last section that intersects significantly
+                         if (entry.isIntersecting) {
+                            const id = entry.target.getAttribute('id');
+                             // Debounce or slight timeout might be needed for rapid scrolling
+                             setTimeout(() => { // Add a slight delay to prevent rapid changes
+                                const activeLink = document.querySelector('.main-nav a.active');
+                                if (activeLink && activeLink.getAttribute('href') !== `#${id}`) {
+                                     activeLink.classList.remove('active');
+                                }
+                                const newActiveLink = document.querySelector(`.main-nav a[href="#${id}"]`);
+                                if (newActiveLink) {
+                                    newActiveLink.classList.add('active');
+                                }
+                             }, 100); // Adjust delay as needed
+                         }
+                    }
+                     // Special handling for the hero section when scrolling back up
+                    if (!entry.isIntersecting && entry.target.getAttribute('id') === 'hero' && rect.bottom > 0 && window.scrollY < 50) {
+                         // When scrolling back up and hero is partially visible at the top
+                         setTimeout(() => {
+                             document.querySelector('.main-nav a.active').classList.remove('active');
+                             document.querySelector('.main-nav a[href="#hero"]').classList.add('active');
+                         }, 100);
                     }
                 });
             }, observerOptions);
 
-            sections.forEach(section => sectionObserver.observe(section));
+
+            sections.forEach(section => {
+                // Exclude the last section from standard observation if it's part of the CTA flow linked from hero
+                 if (section.getAttribute('id') !== 'cta') {
+                     sectionObserver.observe(section);
+                 }
+            });
+
+             // Add observer for the CTA section with a different threshold
+             const ctaSection = document.getElementById('cta');
+             if (ctaSection) {
+                const ctaObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                             // Activate CTA link when CTA section is visible
+                             document.querySelector('.main-nav a.active').classList.remove('active');
+                             const ctaLink = document.querySelector('.main-nav a[href="#cta"]');
+                             if (ctaLink) {
+                                 ctaLink.classList.add('active');
+                             }
+                        } else {
+                            // Optional: remove active class if scrolling away from CTA, depends on desired behavior
+                            const ctaLink = document.querySelector('.main-nav a[href="#cta"]');
+                             if (ctaLink && ctaLink.classList.contains('active')) {
+                                // Decide if you want to remove active class when CTA is not visible
+                                // ctaLink.classList.remove('active'); // Might cause flicker, test carefully
+                             }
+                        }
+                    });
+                }, { threshold: 0.6 }); // High threshold for CTA
+                 ctaObserver.observe(ctaSection);
+             }
 
 
             // --- Reveal elements on scroll ---
@@ -551,17 +673,26 @@
             // --- Hero Canvas Particle Animation ---
             const canvas = document.getElementById('hero-canvas');
             const ctx = canvas.getContext('2d');
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+            let animationFrameId; // To store the request ID for cancellation
 
             let particlesArray;
 
             const mouse = { x: null, y: null, radius: (canvas.height/110) * (canvas.width/110) };
-            window.addEventListener('mousemove', (event) => {
+
+            function handleMouseMove(event) {
                 mouse.x = event.x;
                 mouse.y = event.y;
-            });
-            
+            }
+
+            function handleMouseOut() {
+                mouse.x = undefined;
+                mouse.y = undefined;
+            }
+
+            window.addEventListener('mousemove', handleMouseMove);
+             window.addEventListener('mouseout', handleMouseOut);
+
+
             class Particle {
                 constructor(x, y, directionX, directionY, size, color) {
                     this.x = x; this.y = y; this.directionX = directionX; this.directionY = directionY;
@@ -589,16 +720,22 @@
                     this.draw();
                 }
             }
-            
+
             function init() {
                 particlesArray = [];
-                let numberOfParticles = (canvas.height * canvas.width) / 9000;
+                // Adjust particle count based on screen size, keeping it reasonable
+                let numberOfParticles = (canvas.height * canvas.width) / 15000; // Reduced density
+                 if (window.innerWidth < 768) {
+                     numberOfParticles = (canvas.height * canvas.width) / 20000; // Further reduced for mobile
+                 }
+                 numberOfParticles = Math.min(numberOfParticles, 150); // Cap max particles
+
                 for (let i=0; i < numberOfParticles; i++) {
-                    let size = (Math.random() * 2) + 1;
+                    let size = (Math.random() * 2) + 1; // Keep sizes small
                     let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
                     let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
-                    let directionX = (Math.random() * 0.4) - 0.2;
-                    let directionY = (Math.random() * 0.4) - 0.2;
+                    let directionX = (Math.random() * 0.2) - 0.1; // Slower movement
+                    let directionY = (Math.random() * 0.2) - 0.1; // Slower movement
                     let color = 'rgba(31, 108, 255, 0.8)';
                     particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
                 }
@@ -606,12 +743,13 @@
 
             function connect() {
                 let opacityValue = 1;
+                const maxDistance = (canvas.width/9) * (canvas.height/9); // Reduced connection distance
                 for(let a = 0; a < particlesArray.length; a++){
                     for(let b = a; b < particlesArray.length; b++){
                         let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x))
                                      + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
-                        if(distance < (canvas.width/7) * (canvas.height/7)){
-                            opacityValue = 1 - (distance/20000);
+                        if(distance < maxDistance){
+                            opacityValue = 1 - (distance/maxDistance); // Scale opacity based on reduced max distance
                             ctx.strokeStyle = `rgba(31, 108, 255, ${opacityValue})`;
                             ctx.lineWidth = 1;
                             ctx.beginPath();
@@ -624,28 +762,39 @@
             }
 
             function animate() {
-                requestAnimationFrame(animate);
-                ctx.clearRect(0,0,innerWidth, innerHeight);
+                animationFrameId = requestAnimationFrame(animate);
+                ctx.clearRect(0,0,canvas.width, canvas.height); // Use canvas.width/height
                 for(let i=0; i<particlesArray.length; i++){
                     particlesArray[i].update();
                 }
                 connect();
             }
 
-            window.addEventListener('resize', () => {
-                canvas.width = innerWidth;
-                canvas.height = innerHeight;
+             function handleResize() {
+                cancelAnimationFrame(animationFrameId); // Cancel previous frame
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
                 mouse.radius = (canvas.height/110) * (canvas.width/110);
                 init();
-            });
+                animate(); // Start new animation loop
+            }
 
-            window.addEventListener('mouseout', () => {
-                mouse.x = undefined;
-                mouse.y = undefined;
-            });
-            
+
+            window.addEventListener('resize', handleResize);
+
+
+            // Initial setup
             init();
             animate();
+
+             // Clean up event listeners when the component is potentially removed
+             // This is more relevant in frameworks, but good practice for complex JS
+             window.addEventListener('beforeunload', () => {
+                 window.removeEventListener('mousemove', handleMouseMove);
+                 window.removeEventListener('mouseout', handleMouseOut);
+                 window.removeEventListener('resize', handleResize);
+                 cancelAnimationFrame(animationFrameId);
+             });
 
         });
     </script>
